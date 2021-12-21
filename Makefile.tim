@@ -1,0 +1,46 @@
+all: \
+	iso/menu/menu.arc \
+	iso/menu/loading.tim \
+	iso/font/boldfont.tim \
+	iso/font/arial.tim \
+	iso/stage/hud0.tim \
+	iso/stage/hud1.tim \
+	iso/stage/hud0weeb.tim \
+	iso/bf/main.arc \
+	iso/bf/dead.arc \
+	iso/tae/main.arc \
+	iso/taemad/main.arc \
+	iso/gf/main.arc \
+	iso/gf/speaker.tim \
+	iso/week2/back.arc \
+	iso/lasthope/back.arc \
+	iso/week4/back.arc 
+
+iso/%.tim: iso/%.png
+	tools/funkintimconv/funkintimconv $@ $<
+
+iso/%.arc:
+	tools/funkinarcpak/funkinarcpak $@ $^
+
+# Menu
+iso/menu/menu.arc: iso/menu/back.tim iso/menu/ng.tim iso/menu/title.tim
+
+# BF
+iso/bf/main.arc: iso/bf/idle.tim iso/bf/hit0.tim iso/bf/miss0.tim iso/bf/hit1.tim iso/bf/miss1.tim iso/bf/peace.tim iso/bf/dead0.tim
+iso/bf/dead.arc: iso/bf/dead1.tim iso/bf/dead2.tim iso/bf/retry.tim
+
+# tae
+iso/tae/main.arc: iso/tae/idle0.tim iso/tae/idle1.tim iso/tae/idle2.tim iso/tae/left0.tim iso/tae/left1.tim iso/tae/down0.tim iso/tae/down1.tim iso/tae/down2.tim iso/tae/down3.tim iso/tae/up0.tim iso/tae/up1.tim iso/tae/right0.tim iso/tae/right1.tim
+
+iso/taemad/main.arc: iso/taemad/idle0.tim iso/taemad/idle1.tim iso/taemad/idle2.tim iso/taemad/idle3.tim iso/taemad/left0.tim iso/taemad/left1.tim iso/taemad/left2.tim iso/taemad/down0.tim iso/taemad/down1.tim iso/taemad/down2.tim iso/taemad/up0.tim iso/taemad/up1.tim iso/taemad/up2.tim iso/taemad/right0.tim iso/taemad/right1.tim iso/taemad/right2.tim iso/taemad/speak0.tim iso/taemad/speak1.tim iso/taemad/speak2.tim iso/taemad/speak3.tim iso/taemad/speak4.tim iso/taemad/speak5.tim iso/taemad/speak6.tim iso/taemad/speak7.tim iso/taemad/speak8.tim iso/taemad/speak9.tim
+# GF
+iso/gf/main.arc: iso/gf/bopleft.tim iso/gf/bopright.tim iso/gf/cry.tim
+
+# Week 2
+iso/week2/back.arc: iso/week2/back0.tim iso/week2/back1.tim
+
+# Week 4
+iso/week4/back.arc: iso/week4/back0.tim iso/week4/back1.tim
+
+
+iso/lasthope/back.arc: iso/lasthope/back0.tim iso/lasthope/back1.tim
