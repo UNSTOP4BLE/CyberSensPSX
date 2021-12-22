@@ -15,7 +15,7 @@ static const XA_TrackDef xa_tracks[] = {
 	{XA_Week1A, XA_LENGTH(12600)}, //XA_Fresh
 	//WEEK1B.XA
 	{XA_Week1B, XA_LENGTH(19000)}, //XA_Dadbattle
-	{XA_Week1B, XA_LENGTH(19000)}, //XA_tutorial
+	{XA_Week1B, XA_LENGTH(14800)}, //XA_tutorial
 };
 
 static const char *xa_paths[] = {

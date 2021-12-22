@@ -23,7 +23,7 @@
 #include "object/splash.h"
 
 //Stage constants
-#define STAGE_PERFECT //Play all notes perfectly
+//#define STAGE_PERFECT //Play all notes perfectly
 //#define STAGE_NOHUD //Disable the HUD
 
 //#define STAGE_FREECAM //Freecam
@@ -45,6 +45,7 @@ static const u16 note_key[] = {INPUT_LEFT, INPUT_DOWN, INPUT_UP, INPUT_RIGHT};
 
 //Stage definitions
 #include "character/bf.h"
+#include "character/sanz.h"
 #include "character/tae.h"
 #include "character/taemad.h"
 #include "character/gf.h"
@@ -52,6 +53,7 @@ static const u16 note_key[] = {INPUT_LEFT, INPUT_DOWN, INPUT_UP, INPUT_RIGHT};
 #include "stage/week2.h"
 #include "stage/week4.h"
 #include "stage/lasthope.h"
+#include "stage/snazbg.h"
 
 static const StageDef stage_defs[StageId_Max] = {
 	#include "stagedef_disc1.h"
@@ -639,21 +641,29 @@ static void Stage_DrawHealth(s16 health, u8 i, s8 ox)
 {
 	//Check if we should use 'dying' frame
 	s8 dying;
+	s8 swap;
 	if (ox < 0)
+	{
 		dying = (health >= 18000) * 34;
-	else
-		dying = (health <= 2000) * 34;
+	}
 	
+		
+    else
+	{
+		dying = (health <= 2000) * 34;
+		swap = (stage.stage_id == StageId_1_4 && stage.song_step >= 948 && stage.song_step <= 951) * 34*2;
+	}
+
 	//Get src and dst
 	fixed_t hx = (128 << FIXED_SHIFT) * (10000 - health) / 10000;
 	RECT src = {
-		(i % 3) * 68 + dying,
-		16 + (i / 3) * 34,
+		(i % 2) * 102 + dying + swap,
+		16 + (i / 2) * 34,
 		34,
-		34
+		34,
 	};
 	RECT_FIXED dst = {
-		hx + ox * FIXED_DEC(18,1) - FIXED_DEC(17,1),
+		hx + ox * FIXED_DEC(18,1) - FIXED_DEC(15,1),
 		FIXED_DEC(SCREEN_HEIGHT2 - 32 + 4 - 17, 1),
 		src.w << FIXED_SHIFT,
 		src.h << FIXED_SHIFT
@@ -1366,7 +1376,7 @@ void Stage_Tick(void)
 					if (stage.stage_id <= StageId_LastVanilla)
 					{
 						if (stage.story)
-							Menu_Load(MenuPage_Story);
+							Menu_Load(MenuPage_Main);
 						else
 							Menu_Load(MenuPage_Freeplay);
 					}

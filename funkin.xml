@@ -70,11 +70,19 @@
 				<file name = "back.arc" type = "data" source = "iso/lasthope/back.arc"/>
 			</dir>
 			
+			<dir name = "snazbg">
+				<!-- Background art -->
+				<file name = "back.arc" type = "data" source = "iso/snazbg/back.arc"/>
+			</dir>
+			
 			<!-- Character assets -->
 			<dir name = "char">
 				<!-- Boyfriend assets -->
 				<file name = "bf.arc" type = "data" source = "iso/bf/main.arc"/>
 				<file name = "bfdead.arc" type = "data" source = "iso/bf/dead.arc"/>
+
+				<file name = "sanz.arc" type = "data" source = "iso/sanz/main.arc"/>
+				<file name = "sanzdead.arc" type = "data" source = "iso/sanz/dead.arc"/>
 				
 				<!-- tae assets -->
 				<file name = "tae.arc" type = "data" source = "iso/tae/main.arc"/>

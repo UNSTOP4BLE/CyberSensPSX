@@ -8,12 +8,15 @@ all: \
 	iso/stage/hud0weeb.tim \
 	iso/bf/main.arc \
 	iso/bf/dead.arc \
+	iso/sanz/main.arc \
+	iso/sanz/dead.arc \
 	iso/tae/main.arc \
 	iso/taemad/main.arc \
 	iso/gf/main.arc \
 	iso/gf/speaker.tim \
 	iso/week2/back.arc \
 	iso/lasthope/back.arc \
+	iso/snazbg/back.arc \
 	iso/week4/back.arc 
 
 iso/%.tim: iso/%.png
@@ -28,6 +31,10 @@ iso/menu/menu.arc: iso/menu/back.tim iso/menu/ng.tim iso/menu/title.tim
 # BF
 iso/bf/main.arc: iso/bf/idle.tim iso/bf/hit0.tim iso/bf/miss0.tim iso/bf/hit1.tim iso/bf/miss1.tim iso/bf/peace.tim iso/bf/dead0.tim
 iso/bf/dead.arc: iso/bf/dead1.tim iso/bf/dead2.tim iso/bf/retry.tim
+
+# sans
+iso/sanz/main.arc: iso/sanz/idle0.tim iso/sanz/idle1.tim iso/sanz/right0.tim iso/sanz/right1.tim iso/sanz/down.tim iso/sanz/left.tim iso/sanz/eye.tim iso/sanz/up.tim iso/sanz/dead0.tim
+iso/sanz/dead.arc: iso/sanz/dead1.tim iso/sanz/dead2.tim iso/sanz/retry.tim
 
 # tae
 iso/tae/main.arc: iso/tae/idle0.tim iso/tae/idle1.tim iso/tae/idle2.tim iso/tae/left0.tim iso/tae/left1.tim iso/tae/down0.tim iso/tae/down1.tim iso/tae/down2.tim iso/tae/down3.tim iso/tae/up0.tim iso/tae/up1.tim iso/tae/right0.tim iso/tae/right1.tim
@@ -44,3 +51,5 @@ iso/week4/back.arc: iso/week4/back0.tim iso/week4/back1.tim
 
 
 iso/lasthope/back.arc: iso/lasthope/back0.tim iso/lasthope/back1.tim
+
+iso/snazbg/back.arc: iso/snazbg/back0.tim iso/snazbg/back1.tim

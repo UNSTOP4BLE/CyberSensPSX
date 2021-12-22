@@ -21,9 +21,11 @@ SRCS = src/main.c \
        src/stage/week2.c \
        src/stage/week4.c \
        src/stage/lasthope.c \
+       src/stage/snazbg.c \
        src/animation.c \
        src/character.c \
        src/character/bf.c \
+       src/character/sanz.c \
        src/character/speaker.c \
        src/character/tae.c \
        src/character/taemad.c \

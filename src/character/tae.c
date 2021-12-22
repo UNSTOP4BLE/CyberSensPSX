@@ -106,6 +106,17 @@ void Char_tae_Tick(Character *character)
 {
 	Char_tae *this = (Char_tae*)character;
 
+	if (stage.stage_id == StageId_1_4 && stage.song_step > 938) {
+		this->character.focus_x = FIXED_DEC(100,1);
+		this->character.focus_y = FIXED_DEC(-120,1);
+		this->character.focus_zoom = FIXED_DEC(15,10);
+	}
+	if (stage.stage_id == StageId_1_4 && stage.song_step > 949) {
+		this->character.focus_x = FIXED_DEC(0,1);
+		this->character.focus_y = FIXED_DEC(-125,1);
+		this->character.focus_zoom = FIXED_DEC(8,10);
+	}
+
 	if (stage.stage_id == StageId_1_2 && stage.song_step > -20) {
 		this->character.focus_zoom = FIXED_DEC(15,10);
 	}
