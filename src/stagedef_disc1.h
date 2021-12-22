@@ -46,3 +46,19 @@
 		
 		StageId_1_3, 0
 	},
+	{ //StageId_1_4 (Tutorial)
+		//Characters
+		{Char_BF_New,   FIXED_DEC(60,1),  FIXED_DEC(100,1)},
+		{Char_tae_New,   FIXED_DEC(0,1),  FIXED_DEC(-15,1)}, //TODO
+		{Char_GF_New,    FIXED_DEC(0,1),    FIXED_DEC(0,1)},
+		
+		//Stage background
+		Back_Week4_New,
+		
+		//Song info
+		{FIXED_DEC(1,1),FIXED_DEC(1,1),FIXED_DEC(1,1)},
+		1, 4,
+		XA_Tutorial, 2,
+		
+		StageId_1_4, 0
+	},

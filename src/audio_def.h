@@ -15,11 +15,13 @@ static const XA_TrackDef xa_tracks[] = {
 	{XA_Week1A, XA_LENGTH(12600)}, //XA_Fresh
 	//WEEK1B.XA
 	{XA_Week1B, XA_LENGTH(19000)}, //XA_Dadbattle
+	{XA_Week1B, XA_LENGTH(19000)}, //XA_tutorial
 };
 
 static const char *xa_paths[] = {
 	"\\MUSIC\\MENU.XA;1",   //XA_Menu
 	"\\MUSIC\\WEEK1A.XA;1", //XA_Week1A
+	"\\MUSIC\\WEEK1B.XA;1", //XA_Week1B
 	"\\MUSIC\\WEEK1B.XA;1", //XA_Week1B
 	NULL,
 };
@@ -39,6 +41,7 @@ static const XA_Mp3 xa_mp3s[] = {
 	{"fresh", true},   //XA_Fresh
 	//WEEK1B.XA
 	{"dadbattle", true}, //XA_Dadbattle
+	{"tutorial", true}, //XA_Dadbattle
 	
 	{NULL, false}
 };

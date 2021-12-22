@@ -49,6 +49,8 @@
 				<file name = "1.2n.cht" type = "data" source = "iso/chart/wear-a-mask.json.cht"/>
 				<!-- Dadbattle charts -->
 				<file name = "1.3n.cht" type = "data" source = "iso/chart/last-hope.json.cht"/>
+				<!-- Tutorial charts -->
+				<file name = "1.4n.cht" type = "data" source = "iso/chart/new-hope.json.cht"/>
 			</dir>
 			
 			<!-- Week 2 assets -->

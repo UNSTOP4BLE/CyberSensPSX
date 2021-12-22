@@ -29,6 +29,7 @@ typedef enum
 	XA_Fresh,   //Fresh
 	//WEEK1B.XA
 	XA_Dadbattle, //DadBattle
+	XA_Tutorial, //DadBattle
 	
 	XA_TrackMax,
 } XA_Track;

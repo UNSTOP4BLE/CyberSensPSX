@@ -633,6 +633,7 @@ void Menu_Tick(void)
 				{StageId_1_1, ""},
 				{StageId_1_2, "FRESH"},
 				{StageId_1_3, "DADBATT"},
+				{StageId_1_4, "NEW HOPE"},
 			};
 			
 			//Initialize page
