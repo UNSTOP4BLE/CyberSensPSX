@@ -26,28 +26,41 @@
 
 //Menu messages
 static const char *funny_messages[][2] = {
-	{"STINKY", "SMELLY"},
-	{"EVAN", "EVAN"},
-	{"MOISTY IS MOIST", "MOST LIKELY"},
-	{"JELLYFISH", "LAZY MF"},
+	{"PSX PORT BY CUCKYDEV", "YOU KNOW IT"},
+	{"PORTED BY CUCKYDEV", "WHAT YOU GONNA DO"},
+	{"FUNKIN", "FOREVER"},
+	{"WHAT THE HELL", "RITZ PSX"},
 	{"LIKE PARAPPA", "BUT COOLER"},
-	{"CHECK OUT", "FRIDAY NIGHT FUNKIN SOFT"},
-	{"CHECK OUT", "B3 MOD"},
-	{"CORY PLAYS", "WHEN"},
-	{"PRESS X", "ON THE CREDITS"},
-	{"PEE", "BOX"},
-	{"MOISTCRITIKAL", "BIGGEST INSPIRATION"},
-	{"GENOX", "CODES IN NOTEPAD"},
-	{"SMOKEY", "BASED"},
-	{"NOLIME", "YESLIME"},
-	{"PINCER", "CORRUPTED ME"},
-	{"BRIGHTFYRE", "I HATE THAT DUDE"},
-	{"TAMACOOCHI", "SHES FUNNY LMAO"},
-	{"TWOOP", "CUTSCENES POG"},
-	{"NEO FOUR POINT OH", "WHEN"},
-	{"NEO SANPI", "WHEN"},
-	{"NEO TANKPERSON", "WHEN"},
-	{"NEO GARCOLO", "WHEN"},
+	{"THE JAPI", "EL JAPI"},
+	{"PICO FUNNY", "PICO FUNNY"},
+	{"OPENGL BACKEND", "BY CLOWNACY"},
+	{"CUCKYFNF", "SETTING STANDARDS"},
+	{"lool", "inverted colours"},
+	{"NEVER LOOK AT", "THE ISSUE TRACKER"},
+	{"PSXDEV", "HOMEBREW"},
+	{"ZERO POINT ZERO TWO TWO EIGHT", "ONE FIVE NINE ONE ZERO FIVE"},
+	{"DOPE ASS GAME", "PLAYSTATION MAGAZINE"},
+	{"NEWGROUNDS", "FOREVER"},
+	{"NO FPU", "NO PROBLEM"},
+	{"OK OKAY", "WATCH THIS"},
+	{"ITS MORE MALICIOUS", "THAN ANYTHING"},
+	{"USE A CONTROLLER", "LOL"},
+	{"SNIPING THE KICKSTARTER", "HAHA"},
+	{"SHITS UNOFFICIAL", "NOT A PROBLEM"},
+	{"SYSCLK", "RANDOM SEED"},
+	{"THEY DIDNT HIT THE GOAL", "STOP"},
+	{"FCEFUWEFUETWHCFUEZDSLVNSP", "PQRYQWENQWKBVZLZSLDNSVPBM"},
+	{"PSXFUNKIN BY CUCKYDEV", "SUCK IT DOWN"},
+	{"PLAYING ON EPSXE HUH", "YOURE THE PROBLEM"},
+	{"NEXT IN LINE", "ATARI"},
+	{"HAXEFLIXEL", "COME ON"},
+	{"HAHAHA", "I DONT CARE"},
+	{"GET ME TO STOP", "TRY"},
+	{"FNF MUKBANG GIF", "THATS UNRULY"},
+	{"OPEN SOURCE", "FOREVER"},
+	{"ITS A PORT", "ITS WORSE"},
+	{"WOW GATO", "WOW GATO"},
+	{"BALLS FISH", "BALLS FISH"},
 };
 
 #ifdef PSXF_NETWORK
@@ -314,27 +327,24 @@ void Menu_Tick(void)
 				switch (beat)
 				{
 					case 3:
-						menu.font_bold.draw(&menu.font_bold, "", SCREEN_WIDTH2, SCREEN_HEIGHT2 + 64, FontAlign_Center);
+						menu.font_bold.draw(&menu.font_bold, "PRESENT", SCREEN_WIDTH2, SCREEN_HEIGHT2 + 32, FontAlign_Center);
 				//Fallthrough
 					case 2:
 					case 1:
-						menu.font_bold.draw(&menu.font_bold, "JELLYFISH",   SCREEN_WIDTH2, SCREEN_HEIGHT2 - 64, FontAlign_Center);
-						menu.font_bold.draw(&menu.font_bold, "MOISTY",   SCREEN_WIDTH2, SCREEN_HEIGHT2 - 48, FontAlign_Center);
-						menu.font_bold.draw(&menu.font_bold, "PINCER",   SCREEN_WIDTH2, SCREEN_HEIGHT2 - 32, FontAlign_Center);
-						menu.font_bold.draw(&menu.font_bold, "SMOKEY", SCREEN_WIDTH2, SCREEN_HEIGHT2 - 16, FontAlign_Center);
-						menu.font_bold.draw(&menu.font_bold, "GENOX",   SCREEN_WIDTH2, SCREEN_HEIGHT2,      FontAlign_Center);
-						menu.font_bold.draw(&menu.font_bold, "NOLIME",      SCREEN_WIDTH2, SCREEN_HEIGHT2 + 16, FontAlign_Center);
-						menu.font_bold.draw(&menu.font_bold, "BRIGHTFYRE",      SCREEN_WIDTH2, SCREEN_HEIGHT2 + 32, FontAlign_Center);
+						menu.font_bold.draw(&menu.font_bold, "NINJAMUFFIN",   SCREEN_WIDTH2, SCREEN_HEIGHT2 - 32, FontAlign_Center);
+						menu.font_bold.draw(&menu.font_bold, "PHANTOMARCADE", SCREEN_WIDTH2, SCREEN_HEIGHT2 - 16, FontAlign_Center);
+						menu.font_bold.draw(&menu.font_bold, "KAWAISPRITE",   SCREEN_WIDTH2, SCREEN_HEIGHT2,      FontAlign_Center);
+						menu.font_bold.draw(&menu.font_bold, "EVILSKER",      SCREEN_WIDTH2, SCREEN_HEIGHT2 + 16, FontAlign_Center);
 						break;
 					
 					case 7:
-						menu.font_bold.draw(&menu.font_bold, "FRIDAY NIGHT FUNKIN",    SCREEN_WIDTH2, SCREEN_HEIGHT2 - 32, FontAlign_Center);
+						menu.font_bold.draw(&menu.font_bold, "NEWGROUNDS",    SCREEN_WIDTH2, SCREEN_HEIGHT2 - 32, FontAlign_Center);
 						Gfx_BlitTex(&menu.tex_ng, &src_ng, (SCREEN_WIDTH - 128) >> 1, SCREEN_HEIGHT2 - 16);
 				//Fallthrough
 					case 6:
 					case 5:
-						menu.font_bold.draw(&menu.font_bold, "A COOL MOD", SCREEN_WIDTH2, SCREEN_HEIGHT2 - 64, FontAlign_Center);
-						menu.font_bold.draw(&menu.font_bold, "FOR",           SCREEN_WIDTH2, SCREEN_HEIGHT2 - 48, FontAlign_Center);
+						menu.font_bold.draw(&menu.font_bold, "IN ASSOCIATION", SCREEN_WIDTH2, SCREEN_HEIGHT2 - 64, FontAlign_Center);
+						menu.font_bold.draw(&menu.font_bold, "WITH",           SCREEN_WIDTH2, SCREEN_HEIGHT2 - 48, FontAlign_Center);
 						break;
 					
 					case 11:
@@ -345,16 +355,13 @@ void Menu_Tick(void)
 						menu.font_bold.draw(&menu.font_bold, funny_message[0], SCREEN_WIDTH2, SCREEN_HEIGHT2 - 16, FontAlign_Center);
 						break;
 					
-
 					case 15:
-						menu.font_bold.draw(&menu.font_bold, "NEO", SCREEN_WIDTH2, SCREEN_HEIGHT2 + 24, FontAlign_Center);
-					case 14:
 						menu.font_bold.draw(&menu.font_bold, "FUNKIN", SCREEN_WIDTH2, SCREEN_HEIGHT2 + 8, FontAlign_Center);
 				//Fallthrough
-					case 13:
+					case 14:
 						menu.font_bold.draw(&menu.font_bold, "NIGHT", SCREEN_WIDTH2, SCREEN_HEIGHT2 - 8, FontAlign_Center);
 				//Fallthrough
-					case 12:
+					case 13:
 						menu.font_bold.draw(&menu.font_bold, "FRIDAY", SCREEN_WIDTH2, SCREEN_HEIGHT2 - 24, FontAlign_Center);
 						break;
 				}
@@ -608,9 +615,9 @@ void Menu_Tick(void)
 				const char *text;
 			} menu_options[] = {
 				//{StageId_4_4, "TEST"},
-				{StageId_1_1, ""},
-				{StageId_1_2, "FRESH"},
-				{StageId_1_3, "DADBATT"},
+				{StageId_1_1, "OPEN SYSTEM"},
+				{StageId_1_2, "WEAR A MASK"},
+				{StageId_1_3, "LAST HOPE"},
 				{StageId_1_4, "NEW HOPE"},
 			};
 			
@@ -705,50 +712,26 @@ void Menu_Tick(void)
 				const char *text;
 				boolean difficulty;
 			} menu_options[] = {
-				{StageId_Clwn_2, "	OG NEO MOD DEVS", false},
-				{StageId_Clwn_2, "JELLYFISHEDM", false},
-				{StageId_Clwn_2, "MR MOISTY", false},
-				{StageId_Clwn_2, "NO LIME", false},
-				{StageId_Clwn_2, "PINCER", false},
-				{StageId_Clwn_2, "TWOOPYT", false},
-				{StageId_Clwn_2, "SMOKEY", false},
-				{StageId_Clwn_2, "GENOX", false},
-				{StageId_Clwn_2, "TAMACOOCHI", false},
-				{StageId_Clwn_2, "	OG NEO TNX DEVS", false},
-				{StageId_Clwn_2, "ARSTGMER", false},
-				{StageId_Clwn_2, "SIMPLYCRISPY", false},
-				{StageId_Clwn_2, "BIDDLE3", false},
-				{StageId_Clwn_2, "RECD", false},
-				{StageId_Clwn_2, "NATEANIM8", false},
-				{StageId_Clwn_2, "KATCHII", false},
-				{StageId_Clwn_2, "BOMBASTICHYPE", false},
+				{StageId_Clwn_2, "	OG CYBER SENSATION DEVS", false},
+				{StageId_Clwn_2, "TAEYAI", false},
+				{StageId_Clwn_2, "JZBOY", false},
+				{StageId_Clwn_2, "PIM PALASITE", false},
+				{StageId_Clwn_2, "PEE TA GORAD", false},
+				{StageId_Clwn_2, "ATOMIXX", false},
+				{StageId_Clwn_2, "KAL", false},
+				{StageId_Clwn_2, "	OG TNX DEVS", false},
 				{StageId_Clwn_2, "KADEDEV", false},
-				{StageId_Clwn_2, "CESARFEVER", false},
-				{StageId_Clwn_2, "EVANCLUBYT", false},
+				{StageId_Clwn_2, "STICKYBM", false},
 				{StageId_Clwn_2, "BRIGHTFYRE", false},
-				{StageId_Clwn_2, "JAKENEUTRON", false},
-				{StageId_Clwn_2, "BINA", false},
-				{StageId_Clwn_2, "DAZUKO", false},
-				{StageId_Clwn_2, "ARTCARROT", false},
-				{StageId_Clwn_2, "MASHPROTATO", false},
-				{StageId_Clwn_2, "KLUTCH", false},
-				{StageId_Clwn_2, "CLOWFOE", false},
-				{StageId_Clwn_2, "BBPANZU", false},
-				{StageId_Clwn_2, "UNIQUEGEESE", false},
-				{StageId_Clwn_2, "ROZEBUD", false},
-				{StageId_Clwn_2, "ROMBERT", false},
-				{StageId_Clwn_2, "MONDAY DUSK MONOLITH", false},
-				{StageId_Clwn_2, "DEV TEAM", false},
+				{StageId_Clwn_2, "GENOX", false},
 				{StageId_Kapi_1, "	PORT PROGRAMMING", false},
 				{StageId_Kapi_2, "UNSTOPABLE", false},	
 				{StageId_Kapi_2, "IGORSOU", false},	
-				{StageId_Clwn_1, "	MENUS", false},
-				{StageId_Clwn_2, "UNSTOPABLE", false},
 				{StageId_Clwn_1, "	SPRITES AND IMAGES", false},
-				{StageId_Clwn_1, "MR P", false},
 				{StageId_Clwn_1, "UNSTOPABLE", false},
 				{StageId_Clwn_1, "	PLAYTESTING", false},
-				{StageId_Clwn_1, "FLEA ANIMATRES", false},
+				{StageId_Clwn_1, "UNSTOPABLE", false},
+				{StageId_Clwn_1, "MR P", false},
 				{StageId_Clwn_1, "JOHN PAUL", false},
 			};
 			

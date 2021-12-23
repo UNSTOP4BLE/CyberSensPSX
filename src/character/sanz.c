@@ -130,15 +130,15 @@ static const Animation char_sanz_anim[PlayerAnim_Max] = {
 	{3, (const u8[]){12, ASCR_BACK, 0}},         //PlayerAnim_Peace
 	{3, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},       //PlayerAnim_Sweat
 	
-	{5, (const u8[]){23, 24, 25, 26, 26, 26, 26, 26, 26, 26, ASCR_CHGANI, PlayerAnim_Dead1}}, //PlayerAnim_Dead0
-	{5, (const u8[]){26, ASCR_REPEAT}},                                                       //PlayerAnim_Dead1
-	{3, (const u8[]){27, 28, 29, 30, 30, 30, 30, 30, 30, 30, ASCR_CHGANI, PlayerAnim_Dead3}}, //PlayerAnim_Dead2
-	{3, (const u8[]){30, ASCR_REPEAT}},                                                       //PlayerAnim_Dead3
-	{3, (const u8[]){31, 32, 30, 30, 30, 30, 30, ASCR_CHGANI, PlayerAnim_Dead3}},             //PlayerAnim_Dead4
-	{3, (const u8[]){33, 34, 30, 30, 30, 30, 30, ASCR_CHGANI, PlayerAnim_Dead3}},             //PlayerAnim_Dead5
+	{5, (const u8[]){13, 14, 15, 16, 16, 16, 16, 16, 16, 16, ASCR_CHGANI, PlayerAnim_Dead1}}, //PlayerAnim_Dead0
+	{5, (const u8[]){16, ASCR_REPEAT}},                                                       //PlayerAnim_Dead1
+	{3, (const u8[]){17, 18, 19, 20, 20, 20, 20, 20, 20, 20, ASCR_CHGANI, PlayerAnim_Dead3}}, //PlayerAnim_Dead2
+	{3, (const u8[]){20, ASCR_REPEAT}},                                                       //PlayerAnim_Dead3
+	{3, (const u8[]){21, 22, 20, 20, 20, 20, 20, ASCR_CHGANI, PlayerAnim_Dead3}},             //PlayerAnim_Dead4
+	{3, (const u8[]){23, 24, 20, 20, 20, 20, 20, ASCR_CHGANI, PlayerAnim_Dead3}},             //PlayerAnim_Dead5
 	
-	{10, (const u8[]){30, 30, 30, ASCR_BACK, 1}}, //PlayerAnim_Dead4
-	{ 3, (const u8[]){33, 34, 30, ASCR_REPEAT}},  //PlayerAnim_Dead5
+	{10, (const u8[]){20, 20, 20, ASCR_BACK, 1}}, //PlayerAnim_Dead4
+	{ 3, (const u8[]){23, 24, 20, ASCR_REPEAT}},  //PlayerAnim_Dead5
 };
 
 //Boyfriend player functions
@@ -159,6 +159,12 @@ void Char_sanz_SetFrame(void *user, u8 frame)
 void Char_sanz_Tick(Character *character)
 {
 	Char_sanz *this = (Char_sanz*)character;
+	if (stage.stage_id == StageId_1_4 && stage.song_step == 948) {
+		this->character.health_i = 4;
+	}
+	if (stage.stage_id == StageId_1_4 && stage.song_step == 951) {
+		this->character.health_i = 3;
+	}
 	
 	if (stage.stage_id == StageId_1_4 && stage.song_step == 948) {
 		character->set_anim(character, PlayerAnim_Peace);
@@ -367,7 +373,7 @@ Character *Char_sanz_New(fixed_t x, fixed_t y)
 	//Set character information
 	this->character.spec = 0;
 
-	this->character.health_i = 2;
+	this->character.health_i = 3;
 
 	this->character.focus_x = FIXED_DEC(-90,1);
 	this->character.focus_y = FIXED_DEC(-90,1);

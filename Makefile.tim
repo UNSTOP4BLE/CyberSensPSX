@@ -50,6 +50,6 @@ iso/week2/back.arc: iso/week2/back0.tim iso/week2/back1.tim
 iso/week4/back.arc: iso/week4/back0.tim iso/week4/back1.tim
 
 
-iso/lasthope/back.arc: iso/lasthope/back0.tim iso/lasthope/back1.tim
+iso/lasthope/back.arc: iso/lasthope/back0.tim iso/lasthope/back1.tim iso/lasthope/peko.tim
 
 iso/snazbg/back.arc: iso/snazbg/back0.tim iso/snazbg/back1.tim

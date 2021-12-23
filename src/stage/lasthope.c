@@ -13,24 +13,80 @@
 #include "../timer.h"
 #include "../animation.h"
 
-//Week 4 background structure
+//lasthope background structure
 typedef struct
 {
 	//Stage background base structure
 	StageBack back;
 	
 	//Textures
+	IO_Data arc_peko, arc_peko_ptr[1];
 	Gfx_Tex tex_back0; //bg
 	Gfx_Tex tex_back1; //bg
+
+	//peko state
+	Gfx_Tex tex_peko;
+	u8 peko_frame, peko_tex_id;
+
+	Animatable peko0_animatable;
+	Animatable peko1_animatable;
 	
 } Back_lasthope;
+
+//peko animation and rects
+static const CharFrame peko_frame[1] = {
+	{0, {0, 67, 128, 67}, { 128,  67}}, //right 3 (turned off)
+
+};
+
+static const Animation peko_anim[] = {
+	{2, (const u8[]){0, 0, 0, 0, 0,  ASCR_BACK, 1}}, //Left
+
+};
+//peko functions
+void lasthope_peko_SetFrame(void *user, u8 frame)
+{
+	Back_lasthope *this = (Back_lasthope*)user;
+	
+	//Check if this is a new frame
+	if (frame != this->peko_frame)
+	{
+		//Check if new art shall be loaded
+		const CharFrame *cframe = &peko_frame[this->peko_frame = frame];
+		if (cframe->tex != this->peko_tex_id)
+			Gfx_LoadTex(&this->tex_peko, this->arc_peko_ptr[this->peko_tex_id = cframe->tex], 0);
+	}
+}
+
+void lasthope_peko_Draw(Back_lasthope *this, fixed_t x, fixed_t y)
+{
+	//Draw character
+	const CharFrame *cframe = &peko_frame[this->peko_frame];
+	
+	fixed_t ox = x - ((fixed_t)cframe->off[0] << FIXED_SHIFT);
+	fixed_t oy = y - ((fixed_t)cframe->off[1] << FIXED_SHIFT);
+	
+	RECT src = {cframe->src[0], cframe->src[1], cframe->src[2], cframe->src[3]};
+	RECT_FIXED dst = {ox, oy, src.w << FIXED_SHIFT, src.h << FIXED_SHIFT};
+	Stage_DrawTex(&this->tex_peko, &src, &dst, stage.camera.bzoom);
+}
 
 void Back_lasthope_DrawFG(StageBack *back)
 {
 	Back_lasthope *this = (Back_lasthope*)back;
-	
+
 	fixed_t fx, fy;
+
+	//peeko
 	
+
+	if (stage.pico != 1) {
+	lasthope_peko_Draw(this, FIXED_DEC(0,1), FIXED_DEC(43,1));
+	}
+
+	if (stage.pico != 1 && stage.picoanim0 == 1) {
+	Animatable_Animate(&this->peko0_animatable, (void*)this, lasthope_peko_SetFrame);
+	}
 }
 
 void Back_lasthope_DrawMD(StageBack *back)
@@ -79,7 +135,9 @@ void Back_lasthope_Free(StageBack *back)
 {
 	Back_lasthope *this = (Back_lasthope*)back;
 	
-	
+	//Free smoke archive
+	Mem_Free(this->arc_peko);
+
 	//Free structure
 	Mem_Free(this);
 }
@@ -98,10 +156,18 @@ StageBack *Back_lasthope_New(void)
 	this->back.free = Back_lasthope_Free;
 	
 	//Load background textures
+	//Load tv0 textures
+	this->arc_peko = IO_Read("\\LASTHOPE\\BACK.ARC;1");
+	this->arc_peko_ptr[0] = Archive_Find(this->arc_peko, "peko.tim");
+
 	IO_Data arc_back = IO_Read("\\LASTHOPE\\BACK.ARC;1");
 	Gfx_LoadTex(&this->tex_back0, Archive_Find(arc_back, "back0.tim"), 0);
 	Gfx_LoadTex(&this->tex_back1, Archive_Find(arc_back, "back1.tim"), 0);
 	Mem_Free(arc_back);
+
+	Animatable_Init(&this->peko0_animatable, peko_anim);
+	Animatable_SetAnim(&this->peko0_animatable, 0);
+	this->peko_frame = this->peko_tex_id = 0xFF; //Force art load
 	
 	return (StageBack*)this;
 }

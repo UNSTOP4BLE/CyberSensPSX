@@ -641,26 +641,18 @@ static void Stage_DrawHealth(s16 health, u8 i, s8 ox)
 {
 	//Check if we should use 'dying' frame
 	s8 dying;
-	s8 swap;
 	if (ox < 0)
-	{
 		dying = (health >= 18000) * 34;
-	}
-	
-		
-    else
-	{
+	else
 		dying = (health <= 2000) * 34;
-		swap = (stage.stage_id == StageId_1_4 && stage.song_step >= 948 && stage.song_step <= 951) * 34*2;
-	}
-
+	
 	//Get src and dst
 	fixed_t hx = (128 << FIXED_SHIFT) * (10000 - health) / 10000;
 	RECT src = {
-		(i % 2) * 102 + dying + swap,
-		16 + (i / 2) * 34,
+		(i % 3) * 68 + dying,
+		16 + (i / 3) * 34,
 		34,
-		34,
+		34
 	};
 	RECT_FIXED dst = {
 		hx + ox * FIXED_DEC(18,1) - FIXED_DEC(15,1),
@@ -675,6 +667,7 @@ static void Stage_DrawHealth(s16 health, u8 i, s8 ox)
 	Stage_DrawTex(&stage.tex_hud1, &src, &dst, FIXED_MUL(stage.bump, stage.sbump));
 }
 
+		
 static void Stage_DrawStrum(u8 i, RECT *note_src, RECT_FIXED *note_dst)
 {
 	PlayerState *this = &stage.player_state[(i & NOTE_FLAG_OPPONENT) != 0];
@@ -1427,6 +1420,36 @@ void Stage_Tick(void)
 	{
 		case StageState_Play:
 		{
+			if (stage.stage_id == StageId_1_3) {
+				stage.pico = 1;
+				stage.picoanim0 = 1;
+			}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 			//Clear per-frame flags
 			stage.flag &= ~(STAGE_FLAG_JUST_STEP | STAGE_FLAG_SCORE_REFRESH);
 			
