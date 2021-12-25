@@ -22,7 +22,8 @@
 #include "loadscr.h"
 
 #include "stage.h"
-#include "character/gf.h"
+#include "character/opo.h"
+#include "character/ops.h"
 
 //Menu messages
 static const char *funny_messages[][2] = {
@@ -129,10 +130,11 @@ static struct
 	} page_param;
 	
 	//Menu assets
-	Gfx_Tex tex_back, tex_ng, tex_story, tex_title;
+	Gfx_Tex tex_back, tex_ng, tex_story, tex_title, tex_opt;
 	FontData font_bold, font_arial;
 	
-	Character *gf; //Title Girlfriend
+	Character *ops; //Title Girlfriend
+	Character *opo; //Title Girlfriend
 } menu;
 
 #ifdef PSXF_NETWORK
@@ -203,7 +205,7 @@ static const char *Menu_LowerIf(const char *text, boolean lower)
 static void Menu_DrawBack(boolean flash, s32 scroll, u8 r0, u8 g0, u8 b0, u8 r1, u8 g1, u8 b1)
 {
 	RECT back_src = {0, 0, 255, 255};
-	RECT back_dst = {0, -scroll - SCREEN_WIDEADD2, SCREEN_WIDTH, SCREEN_WIDTH * 4 / 5};
+	RECT back_dst = {0, - SCREEN_WIDEADD2, SCREEN_WIDTH, SCREEN_WIDTH * 4 / 5};
 	
 	if (flash || (animf_count & 4) == 0)
 		Gfx_DrawTexCol(&menu.tex_back, &back_src, &back_dst, r0, g0, b0);
@@ -219,12 +221,14 @@ void Menu_Load(MenuPage page)
 	Gfx_LoadTex(&menu.tex_back,  Archive_Find(menu_arc, "back.tim"),  0);
 	Gfx_LoadTex(&menu.tex_ng,    Archive_Find(menu_arc, "ng.tim"),    0);
 	Gfx_LoadTex(&menu.tex_title, Archive_Find(menu_arc, "title.tim"), 0);
+	Gfx_LoadTex(&menu.tex_opt, Archive_Find(menu_arc,   "opt.tim"), 0);
 	Mem_Free(menu_arc);
 	
 	FontData_Load(&menu.font_bold, Font_Bold);
 	FontData_Load(&menu.font_arial, Font_Arial);
 	
-	menu.gf = Char_GF_New(FIXED_DEC(620,1), FIXED_DEC(-12,1));
+	menu.ops = Char_OPS_New(FIXED_DEC(-118,1), FIXED_DEC(40,1));
+	menu.opo = Char_OPO_New(FIXED_DEC(110,1), FIXED_DEC(40,1));
 	stage.camera.x = stage.camera.y = FIXED_DEC(0,1);
 	stage.camera.bzoom = FIXED_UNIT;
 	stage.gf_speed = 4;
@@ -264,7 +268,8 @@ void Menu_Load(MenuPage page)
 void Menu_Unload(void)
 {
 	//Free title Girlfriend
-	Character_Free(menu.gf);
+	Character_Free(menu.ops);
+	Character_Free(menu.opo);
 }
 
 void Menu_ToStage(StageId id, StageDiff diff, boolean story)
@@ -450,17 +455,31 @@ void Menu_Tick(void)
 				Gfx_BlitTex(&menu.tex_title, &press_src, (SCREEN_WIDTH - 256) / 2, SCREEN_HEIGHT - 48);
 			}
 			
-			//Draw Girlfriend
-			menu.gf->tick(menu.gf);
 			break;
 		}
 		case MenuPage_Main:
 		{
+
+			RECT src_ops = {11, 92, 91, 68};
+			RECT src_opo = {126,96, 90, 68};
+
+			if (menu.select == 0)
+			Gfx_BlitTex(&menu.tex_opt, &src_ops, (SCREEN_WIDTH - 315) >> 1, SCREEN_HEIGHT2 - 32);
+
+			if (menu.select == 3)
+			Gfx_BlitTex(&menu.tex_opt, &src_opo, (SCREEN_WIDTH + 140) >> 1, SCREEN_HEIGHT2 - 32);
+			//Draw Girlfriend
+			if (menu.select != 0)
+			menu.ops->tick(menu.ops);
+
+			if (menu.select != 3)
+			menu.opo->tick(menu.opo);
+
 			static const char *menu_options[] = {
-				"STORY MODE",
-				"FREEPLAY",
-				"CREDITS",
-				"OPTIONS",
+				"",
+				"",
+				"",
+				"",
 				#ifdef PSXF_NETWORK
 					"JOIN SERVER",
 					"HOST SERVER",

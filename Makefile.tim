@@ -7,6 +7,7 @@ all: \
 	iso/stage/hud1.tim \
 	iso/stage/hud0weeb.tim \
 	iso/bf/main.arc \
+	iso/option/main.arc \
 	iso/bf/dead.arc \
 	iso/sanz/main.arc \
 	iso/sanz/dead.arc \
@@ -26,7 +27,7 @@ iso/%.arc:
 	tools/funkinarcpak/funkinarcpak $@ $^
 
 # Menu
-iso/menu/menu.arc: iso/menu/back.tim iso/menu/ng.tim iso/menu/title.tim
+iso/menu/menu.arc: iso/menu/back.tim iso/menu/ng.tim iso/menu/title.tim iso/menu/opt.tim
 
 # BF
 iso/bf/main.arc: iso/bf/idle.tim iso/bf/hit0.tim iso/bf/miss0.tim iso/bf/hit1.tim iso/bf/miss1.tim iso/bf/peace.tim iso/bf/dead0.tim
@@ -53,3 +54,7 @@ iso/week4/back.arc: iso/week4/back0.tim iso/week4/back1.tim
 iso/lasthope/back.arc: iso/lasthope/back0.tim iso/lasthope/back1.tim iso/lasthope/peko.tim
 
 iso/snazbg/back.arc: iso/snazbg/back0.tim iso/snazbg/back1.tim
+
+# Options
+
+iso/option/main.arc: iso/option/opc.tim iso/option/ops.tim iso/option/opo.tim

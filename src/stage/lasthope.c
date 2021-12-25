@@ -80,14 +80,16 @@ void Back_lasthope_DrawFG(StageBack *back)
 	//peeko
 	
 
-	if (stage.pico != 1) {
-	lasthope_peko_Draw(this, FIXED_DEC(0,1), FIXED_DEC(43,1));
+	if (RandomRange(0, 1000) == 70) {
+	stage.cooldown = 60;
 	}
 
-	if (stage.pico != 1 && stage.picoanim0 == 1) {
+	if (stage.cooldown != 0)
+	   lasthope_peko_Draw(this, FIXED_DEC(0,1), FIXED_DEC(43,1));
+
 	Animatable_Animate(&this->peko0_animatable, (void*)this, lasthope_peko_SetFrame);
 	}
-}
+
 
 void Back_lasthope_DrawMD(StageBack *back)
 {

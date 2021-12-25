@@ -243,10 +243,7 @@ typedef struct
 	
 	s16 song_step;
 	
-	u8 pico;
-	u8 picoanim0;
-	fixed_t fadepico0, fadespeed, fadeextra, fadeextra2;
-
+	s16 cooldown;
 	u8 gf_speed; //Typically 4 steps, changes in Fresh
 	
 	PlayerState player_state[2];

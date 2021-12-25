@@ -80,6 +80,9 @@
 				<!-- Boyfriend assets -->
 				<file name = "bf.arc" type = "data" source = "iso/bf/main.arc"/>
 				<file name = "bfdead.arc" type = "data" source = "iso/bf/dead.arc"/>
+                
+				<!-- Options assets -->
+				<file name = "option.arc" type = "data" source = "iso/option/main.arc"/>
 
 				<file name = "sanz.arc" type = "data" source = "iso/sanz/main.arc"/>
 				<file name = "sanzdead.arc" type = "data" source = "iso/sanz/dead.arc"/>

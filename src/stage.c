@@ -45,6 +45,8 @@ static const u16 note_key[] = {INPUT_LEFT, INPUT_DOWN, INPUT_UP, INPUT_RIGHT};
 
 //Stage definitions
 #include "character/bf.h"
+#include "character/ops.h"
+#include "character/opo.h"
 #include "character/sanz.h"
 #include "character/tae.h"
 #include "character/taemad.h"
@@ -1420,35 +1422,9 @@ void Stage_Tick(void)
 	{
 		case StageState_Play:
 		{
-			if (stage.stage_id == StageId_1_3) {
-				stage.pico = 1;
-				stage.picoanim0 = 1;
-			}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            
+			if (stage.cooldown > 0)
+			    stage.cooldown--;
 
 			//Clear per-frame flags
 			stage.flag &= ~(STAGE_FLAG_JUST_STEP | STAGE_FLAG_SCORE_REFRESH);
@@ -1697,6 +1673,10 @@ void Stage_Tick(void)
 				}
 			#endif
 			}
+
+				//Draw stage foreground
+			if (stage.back->draw_fg != NULL)
+				stage.back->draw_fg(stage.back);
 			
 			//Tick note splashes
 			ObjectList_Tick(&stage.objlist_splash);
@@ -1801,9 +1781,7 @@ void Stage_Tick(void)
 			}
 			
 				
-			//Draw stage foreground
-			if (stage.back->draw_fg != NULL)
-				stage.back->draw_fg(stage.back);
+		
 			
 			//Tick foreground objects
 			ObjectList_Tick(&stage.objlist_fg);
