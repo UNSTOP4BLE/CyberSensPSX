@@ -71,17 +71,20 @@ void Char_OPO_Tick(Character *character)
 {
 	Char_OPO *this = (Char_OPO*)character;
 	
-	if (stage.flag & STAGE_FLAG_JUST_STEP)
+	if ((character->pad_held & (INPUT_LEFT | INPUT_DOWN | INPUT_UP | INPUT_RIGHT)) == 0)
 	{
-		if ((stage.song_step % stage.gf_speed) == 0)
-			{
-             if (character->animatable.anim == CharAnim_Idle)
-			 	character->set_anim(character, CharAnim_Idle);
-
-				else
-					character->set_anim(character, CharAnim_Idle);
+		Character_CheckEndSing(character);
+		
+		if (stage.flag & STAGE_FLAG_JUST_STEP)
+		{
+			if (Animatable_Ended(&character->animatable) &&
+				(character->animatable.anim != CharAnim_Left &&
+				 character->animatable.anim != CharAnim_Down &&
+				 character->animatable.anim != CharAnim_Up &&
+				 character->animatable.anim != CharAnim_Right) &&
+				(stage.song_step & 0x3) == 0)
+				character->set_anim(character, CharAnim_Idle);
 		}
-
 	}
 	
 	//Animate and draw

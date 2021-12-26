@@ -23,7 +23,7 @@
 #include "object/splash.h"
 
 //Stage constants
-//#define STAGE_PERFECT //Play all notes perfectly
+#define STAGE_PERFECT //Play all notes perfectly
 //#define STAGE_NOHUD //Disable the HUD
 
 //#define STAGE_FREECAM //Freecam
@@ -47,6 +47,7 @@ static const u16 note_key[] = {INPUT_LEFT, INPUT_DOWN, INPUT_UP, INPUT_RIGHT};
 #include "character/bf.h"
 #include "character/ops.h"
 #include "character/opo.h"
+#include "character/opc.h"
 #include "character/sanz.h"
 #include "character/tae.h"
 #include "character/taemad.h"
@@ -1371,7 +1372,7 @@ void Stage_Tick(void)
 					if (stage.stage_id <= StageId_LastVanilla)
 					{
 						if (stage.story)
-							Menu_Load(MenuPage_Main);
+							Menu_Load(MenuPage_Title);
 						else
 							Menu_Load(MenuPage_Freeplay);
 					}

@@ -4,19 +4,19 @@
   file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 
-#include "ops.h"
+#include "opc.h"
 
 #include "../mem.h"
 #include "../archive.h"
 #include "../stage.h"
 #include "../main.h"
 
-//Option Story Mode character structure
+///Option Credits & FreePlay character structure
 enum
 {
-	OPS_ArcMain_OPS0,
+	OPC_ArcMain_OPC0,
 	
-	OPS_Arc_Max,
+	OPC_Arc_Max,
 };
 
 typedef struct
@@ -26,22 +26,23 @@ typedef struct
 	
 	//Render data and state
 	IO_Data arc_main;
-	IO_Data arc_ptr[OPS_Arc_Max];
+	IO_Data arc_ptr[OPC_Arc_Max];
 	
 	Gfx_Tex tex;
 	u8 frame, tex_id;
 	
-} Char_OPS;
+} Char_OPC;
 
-//Option Story Mode character definitions
-static const CharFrame char_ops_frame[] = {
-	{OPS_ArcMain_OPS0, { 91,   0,  93,  67}, { 40,  73}}, //0 bop left 1
-	{OPS_ArcMain_OPS0, {  1,  70,  91,  68}, { 39,  73}}, //1 bop left 2
+///Option Credits & FreePlay character definitions
+static const CharFrame char_opc_frame[] = {
+	{OPC_ArcMain_OPC0, {  0,   0, 100,  51}, { 39,  73}}, //0 bop left 1
+	{OPC_ArcMain_OPC0, { 99,   0, 100,  51}, { 39,  73}}, //1 bop left 2
+	{OPC_ArcMain_OPC0, {  0,  52, 100,  50}, { 39,  73}}, //1 bop left 2
 
 };
 
-static const Animation char_ops_anim[CharAnim_Max] = {
-	{2, (const u8[]){ 0,  1,  ASCR_BACK, 1}},                         //CharAnim_Idle
+static const Animation char_opc_anim[CharAnim_Max] = {
+	{2, (const u8[]){ 0,  1,  2,  ASCR_BACK, 1}},                         //CharAnim_Idle
 	{1, (const u8[]){ 0,  0,  1,  1,  2,  2,  3,  4,  4,  5, ASCR_BACK, 1}}, //CharAnim_Left
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Left}},                           //CharAnim_LeftAlt
 	{2, (const u8[]){12, 13, ASCR_REPEAT}},                                  //CharAnim_Down
@@ -52,24 +53,24 @@ static const Animation char_ops_anim[CharAnim_Max] = {
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Left}},                           //CharAnim_RightAlt
 };
 
-//Option Story Mode character functions
-void Char_OPS_SetFrame(void *user, u8 frame)
+///Option Credits & FreePlay character functions
+void Char_OPC_SetFrame(void *user, u8 frame)
 {
-	Char_OPS *this = (Char_OPS*)user;
+	Char_OPC *this = (Char_OPC*)user;
 	
 	//Check if this is a new frame
 	if (frame != this->frame)
 	{
 		//Check if new art shall be loaded
-		const CharFrame *cframe = &char_ops_frame[this->frame = frame];
+		const CharFrame *cframe = &char_opc_frame[this->frame = frame];
 		if (cframe->tex != this->tex_id)
 			Gfx_LoadTex(&this->tex, this->arc_ptr[this->tex_id = cframe->tex], 0);
 	}
 }
 
-void Char_OPS_Tick(Character *character)
+void Char_OPC_Tick(Character *character)
 {
-	Char_OPS *this = (Char_OPS*)character;
+	Char_OPC *this = (Char_OPC*)character;
 	
 	if ((character->pad_held & (INPUT_LEFT | INPUT_DOWN | INPUT_UP | INPUT_RIGHT)) == 0)
 	{
@@ -88,41 +89,41 @@ void Char_OPS_Tick(Character *character)
 	}
 	
 	//Animate and draw
-	Animatable_Animate(&character->animatable, (void*)this, Char_OPS_SetFrame);
-	Character_Draw(character, &this->tex, &char_ops_frame[this->frame]);
+	Animatable_Animate(&character->animatable, (void*)this, Char_OPC_SetFrame);
+	Character_Draw(character, &this->tex, &char_opc_frame[this->frame]);
 }
 
-void Char_OPS_SetAnim(Character *character, u8 anim)
+void Char_OPC_SetAnim(Character *character, u8 anim)
 {
 	//Set animation
 	Animatable_SetAnim(&character->animatable, anim);
 }
 
-void Char_OPS_Free(Character *character)
+void Char_OPC_Free(Character *character)
 {
-	Char_OPS *this = (Char_OPS*)character;
+	Char_OPC *this = (Char_OPC*)character;
 	
 	//Free art
 	Mem_Free(this->arc_main);
 }
 
-Character *Char_OPS_New(fixed_t x, fixed_t y)
+Character *Char_OPC_New(fixed_t x, fixed_t y)
 {
-	//Allocate ops object
-	Char_OPS *this = Mem_Alloc(sizeof(Char_OPS));
+	//Allocate opc object
+	Char_OPC *this = Mem_Alloc(sizeof(Char_OPC));
 	if (this == NULL)
 	{
-		sprintf(error_msg, "[Char_OPS_New] Failed to allocate ops object");
+		sprintf(error_msg, "[Char_OPC_New] Failed to allocate opc object");
 		ErrorLock();
 		return NULL;
 	}
 	
 	//Initialize character
-	this->character.tick = Char_OPS_Tick;
-	this->character.set_anim = Char_OPS_SetAnim;
-	this->character.free = Char_OPS_Free;
+	this->character.tick = Char_OPC_Tick;
+	this->character.set_anim = Char_OPC_SetAnim;
+	this->character.free = Char_OPC_Free;
 	
-	Animatable_Init(&this->character.animatable, char_ops_anim);
+	Animatable_Init(&this->character.animatable, char_opc_anim);
 	Character_Init((Character*)this, x, y);
 	
 	//Set character information
@@ -138,7 +139,7 @@ Character *Char_OPS_New(fixed_t x, fixed_t y)
 	this->arc_main = IO_Read("\\CHAR\\OPTION.ARC;1");
 	
 	const char **pathp = (const char *[]){
-		"ops.tim",  //OPS_ArcMain_OPS
+		"opc.tim",  //OPC_ArcMain_OPC
 		NULL
 	};
 	IO_Data *arc_ptr = this->arc_ptr;

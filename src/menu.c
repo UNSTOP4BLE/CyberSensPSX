@@ -22,8 +22,11 @@
 #include "loadscr.h"
 
 #include "stage.h"
+#include "character/opc.h"
 #include "character/opo.h"
 #include "character/ops.h"
+
+int minu = 0;
 
 //Menu messages
 static const char *funny_messages[][2] = {
@@ -135,6 +138,8 @@ static struct
 	
 	Character *ops; //Title Girlfriend
 	Character *opo; //Title Girlfriend
+	Character *opf; //Title Girlfriend
+	Character *opc; //Title Girlfriend
 } menu;
 
 #ifdef PSXF_NETWORK
@@ -227,11 +232,13 @@ void Menu_Load(MenuPage page)
 	FontData_Load(&menu.font_bold, Font_Bold);
 	FontData_Load(&menu.font_arial, Font_Arial);
 	
+	menu.opf = Char_OPC_New(FIXED_DEC(-10,1), FIXED_DEC(-30,1));
+	menu.opc = Char_OPC_New(FIXED_DEC(-10,1), FIXED_DEC(44,1));
 	menu.ops = Char_OPS_New(FIXED_DEC(-118,1), FIXED_DEC(40,1));
 	menu.opo = Char_OPO_New(FIXED_DEC(110,1), FIXED_DEC(40,1));
 	stage.camera.x = stage.camera.y = FIXED_DEC(0,1);
 	stage.camera.bzoom = FIXED_UNIT;
-	stage.gf_speed = 4;
+	stage.gf_speed = 8;
 	
 	//Initialize menu state
 	menu.select = menu.next_select = 0;
@@ -268,6 +275,8 @@ void Menu_Load(MenuPage page)
 void Menu_Unload(void)
 {
 	//Free title Girlfriend
+	Character_Free(menu.opc);
+	Character_Free(menu.opf);
 	Character_Free(menu.ops);
 	Character_Free(menu.opo);
 }
@@ -376,6 +385,7 @@ void Menu_Tick(void)
 	//Fallthrough
 		case MenuPage_Title:
 		{
+				minu = 0;
 			//Initialize page
 			if (menu.page_swap)
 			{
@@ -459,20 +469,82 @@ void Menu_Tick(void)
 		}
 		case MenuPage_Main:
 		{
+			if (pad_state.press & PAD_START)
+            minu = 1;
+
+
+            RECT src_opb = {69, 5, 24, 2};
+			RECT dst_opb0 = {(SCREEN_WIDTH - 315) >> 1, SCREEN_HEIGHT2 - 32, 91,68};
+			RECT dst_opb1 = {(SCREEN_WIDTH - 100) >> 1, SCREEN_HEIGHT2 - 112,100,63};
+			RECT dst_opb2 = {(SCREEN_WIDTH - 100) >> 1, SCREEN_HEIGHT2 - 28,101,49};
+			RECT dst_opb3 = {(SCREEN_WIDTH + 140) >> 1, SCREEN_HEIGHT2 - 32,90,68};
 
 			RECT src_ops = {11, 92, 91, 68};
 			RECT src_opo = {126,96, 90, 68};
+			RECT src_opf = {118, 8,100, 63};
+			RECT src_opc = {  4, 8,101, 49};
+            
+			if (menu.next_page == menu.page || menu.next_page == MenuPage_Title)
+			{
 
 			if (menu.select == 0)
 			Gfx_BlitTex(&menu.tex_opt, &src_ops, (SCREEN_WIDTH - 315) >> 1, SCREEN_HEIGHT2 - 32);
 
+		    if (menu.select == 1)
+			Gfx_BlitTex(&menu.tex_opt, &src_opf, (SCREEN_WIDTH - 100) >> 1, SCREEN_HEIGHT2 - 112);
+
+			if (menu.select == 2)
+			Gfx_BlitTex(&menu.tex_opt, &src_opc, (SCREEN_WIDTH - 100) >> 1, SCREEN_HEIGHT2 - 28);
+
 			if (menu.select == 3)
 			Gfx_BlitTex(&menu.tex_opt, &src_opo, (SCREEN_WIDTH + 140) >> 1, SCREEN_HEIGHT2 - 32);
+			} 
+
+
+			else if (minu >= 1)
+			{
+				//Draw selected option
+				if (menu.select == 0)
+				{
+				Gfx_BlitTex(&menu.tex_opt, &src_ops, (SCREEN_WIDTH - 315) >> 1, SCREEN_HEIGHT2 - 32);
+				 Gfx_DrawTex(&menu.tex_ng, &src_opb, &dst_opb1);
+				 Gfx_DrawTex(&menu.tex_ng, &src_opb, &dst_opb2);
+				 Gfx_DrawTex(&menu.tex_ng, &src_opb, &dst_opb3);
+			    }
+				if (menu.select == 1)
+				{
+				 Gfx_BlitTex(&menu.tex_opt, &src_opf, (SCREEN_WIDTH - 100) >> 1, SCREEN_HEIGHT2 - 112);
+				 Gfx_DrawTex(&menu.tex_ng, &src_opb, &dst_opb0);
+				 Gfx_DrawTex(&menu.tex_ng, &src_opb, &dst_opb2);
+				 Gfx_DrawTex(&menu.tex_ng, &src_opb, &dst_opb3);
+			    }
+				if (menu.select == 2)
+				{
+			     Gfx_BlitTex(&menu.tex_opt, &src_opc, (SCREEN_WIDTH - 100) >> 1, SCREEN_HEIGHT2 - 28);
+				 Gfx_DrawTex(&menu.tex_ng, &src_opb, &dst_opb0);
+				 Gfx_DrawTex(&menu.tex_ng, &src_opb, &dst_opb1);
+				 Gfx_DrawTex(&menu.tex_ng, &src_opb, &dst_opb3);
+			    }
+				if (menu.select == 3)
+				{
+				 Gfx_BlitTex(&menu.tex_opt, &src_opo, (SCREEN_WIDTH + 140) >> 1, SCREEN_HEIGHT2 - 32);
+				 Gfx_DrawTex(&menu.tex_ng, &src_opb, &dst_opb0);
+				 Gfx_DrawTex(&menu.tex_ng, &src_opb, &dst_opb1);
+				 Gfx_DrawTex(&menu.tex_ng, &src_opb, &dst_opb2);
+			    }
+			}
+
 			//Draw Girlfriend
-			if (menu.select != 0)
+			if (menu.select != 0  && minu == 0)
 			menu.ops->tick(menu.ops);
 
-			if (menu.select != 3)
+			if (menu.select != 1  && minu == 0)
+			menu.opf->tick(menu.opf);
+            
+			if (menu.select != 2  && minu == 0)
+			menu.opc->tick(menu.opc);
+
+			if (menu.select != 3 && minu == 0)
 			menu.opo->tick(menu.opo);
 
 			static const char *menu_options[] = {
@@ -510,20 +582,33 @@ void Menu_Tick(void)
 			if (menu.next_page == menu.page && Trans_Idle())
 			{
 				//Change option
-				if (pad_state.press & PAD_UP)
+				if (pad_state.press & PAD_LEFT)
 				{
-					if (menu.select > 0)
+					if (menu.select > 0 && menu.select != 2)
 						menu.select--;
+					
+					else if (menu.select == 2 && menu.select != 1)
+						menu.select = 0;
+
 					else
 						menu.select = COUNT_OF(menu_options) - 1;
 				}
-				if (pad_state.press & PAD_DOWN)
+				if (pad_state.press & PAD_RIGHT)
 				{
-					if (menu.select < COUNT_OF(menu_options) - 1)
+					if (menu.select < COUNT_OF(menu_options) - 1 && menu.select != 0)
 						menu.select++;
+					
+					else if (menu.select == 0 && menu.select != 1)
+						menu.select = 2;
 					else
 						menu.select = 0;
 				}
+					if (pad_state.press & PAD_UP)
+					 menu.select = 1;
+
+					 if (pad_state.press & PAD_DOWN)
+					 menu.select = 2;
+				 
 				
 				//Select option if cross is pressed
 				if (pad_state.press & (PAD_START | PAD_CROSS))
@@ -628,6 +713,7 @@ void Menu_Tick(void)
 		}
 		case MenuPage_Freeplay:
 		{
+			minu = 0;
 			static const struct
 			{
 				StageId stage;
@@ -725,6 +811,8 @@ void Menu_Tick(void)
 		}
 		case MenuPage_Mods:
 		{
+			minu = 0;
+
 			static const struct
 			{
 				StageId stage;
@@ -831,6 +919,8 @@ void Menu_Tick(void)
 		}
 		case MenuPage_Options:
 		{
+			minu = 0;
+
 			static const char *gamemode_strs[] = {"NORMAL", "SWAP", "TWO PLAYER"};
 			static const struct
 			{

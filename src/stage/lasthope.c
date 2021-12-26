@@ -33,14 +33,21 @@ typedef struct
 	
 } Back_lasthope;
 
+boolean check;
+int random, random2, random3;
+
 //peko animation and rects
-static const CharFrame peko_frame[1] = {
-	{0, {0, 67, 128, 67}, { 128,  67}}, //right 3 (turned off)
+static const CharFrame peko_frame[3] = {
+	{0, {0,  0, 109, 66}, { 128,  67}}, //right 1
+	{0, {0, 67, 128, 67}, { 128,  67}}, //right 2
+	{0, {109,  0, 105, 61}, { 128,  67}}, //right 3 (turned off)
 
 };
 
-static const Animation peko_anim[] = {
+static const Animation peko_anim[3] = {
 	{2, (const u8[]){0, 0, 0, 0, 0,  ASCR_BACK, 1}}, //Left
+	{2, (const u8[]){1, 1, 1, 1, 1,  ASCR_BACK, 1}}, //Left
+	{2, (const u8[]){2, 2, 2, 2, 2,  ASCR_BACK, 1}}, //Left
 
 };
 //peko functions
@@ -80,14 +87,41 @@ void Back_lasthope_DrawFG(StageBack *back)
 	//peeko
 	
 
-	if (RandomRange(0, 1000) == 70) {
+	if (RandomRange(0, 240) == 70) {
 	stage.cooldown = 60;
 	}
 
-	if (stage.cooldown != 0)
-	   lasthope_peko_Draw(this, FIXED_DEC(0,1), FIXED_DEC(43,1));
+	if (stage.cooldown == 60)
+	  {
+		for (int i = 0; i <= 1; i++)
+		{
+		 random2 = (RandomRange (-20, 240));
+		 random3 = (RandomRange (-20, 100));
 
-	Animatable_Animate(&this->peko0_animatable, (void*)this, lasthope_peko_SetFrame);
+		 if (RandomRange (0, 2) == 0)
+		    random = 0;
+
+		else if (RandomRange (0, 2) == 1)
+		    random = 1;
+
+		else 
+		    random = 2;
+
+			check = false;
+		}
+	  }
+		  
+	   
+	 
+    Animatable_Animate(&this->peko0_animatable, (void*)this, lasthope_peko_SetFrame);
+     
+	if (stage.cooldown != 0)
+	{
+		check = true;
+	   lasthope_peko_Draw(this, FIXED_DEC(random2,1), FIXED_DEC(random3,1));
+       Animatable_SetAnim(&this->peko0_animatable,random);
+	}
+
 	}
 
 
