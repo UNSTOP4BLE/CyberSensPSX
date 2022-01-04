@@ -1430,7 +1430,7 @@ void Stage_Tick(void)
 			//Clear per-frame flags
 			stage.flag &= ~(STAGE_FLAG_JUST_STEP | STAGE_FLAG_SCORE_REFRESH);
 			
-			FntPrint("%d", stage.song_step);
+			//FntPrint("%d", stage.song_step);
 			//Get song position
 			boolean playing;
 			fixed_t next_scroll;
