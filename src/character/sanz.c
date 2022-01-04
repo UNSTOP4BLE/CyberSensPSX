@@ -119,7 +119,6 @@ static const CharFrame char_sanz_frame[] = {
 
 static const Animation char_sanz_anim[PlayerAnim_Max] = {
 	{3, (const u8[]){ 3,  2,  1,  0, ASCR_BACK, 0}}, //CharAnim_Idle
-	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_LeftAlt
 	{3, (const u8[]){ 5,  4, ASCR_BACK, 0}},             //CharAnim_Down
 	{3, (const u8[]){ 5,  4, ASCR_BACK, 0}},             //CharAnim_DownAlt
 	{3, (const u8[]){ 7, 6, ASCR_BACK, 0}},             //CharAnim_Up
@@ -128,6 +127,7 @@ static const Animation char_sanz_anim[PlayerAnim_Max] = {
 	{3, (const u8[]){ 4,  6,  6,  6, ASCR_BACK, 0}},     //CharAnim_LeftAlt
 	{3, (const u8[]){11, 10, ASCR_BACK, 0}},             //CharAnim_Right
 	{3, (const u8[]){11, 10, ASCR_BACK, 0}},     //CharAnim_RightAlt
+	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_LeftAlt
 	{3, (const u8[]){12, ASCR_BACK, 0}},         //PlayerAnim_Peace
 	{3, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},       //PlayerAnim_Sweat
 	

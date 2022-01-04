@@ -95,15 +95,15 @@ static const CharFrame char_taemad_frame[] = {
 
 static const Animation char_taemad_anim[CharAnim_Max] = {
 	{3, (const u8[]){ 0, 1, 2, 3, ASCR_CHGANI, CharAnim_Idle}}, //CharAnim_Idle
-	{2, (const u8[]){ 16,  16,  17, 17,  17,  18,  18,  18,  19,  19, 19,  19,  20,  21,  22,  22,  22,  23, 23,  20,  20, 23,  24, 24,  25,  25, ASCR_BACK, 0}}, //CharAnim_Special
 	{2, (const u8[]){ 4, 5, 6, ASCR_BACK, 0}},         //CharAnim_Left
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_LeftAlt
-	{2, (const u8[]){ 7, 8, 9, ASCR_BACK, 0}},         //CharAnim_Down
+	{2, (const u8[]){ 7, 8, 9, ASCR_BACK, 0}},         //CharAnim_Down	
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_DownAlt
 	{2, (const u8[]){ 10, 11, 12, ASCR_BACK, 0}},         //CharAnim_Up
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_UpAlt
 	{2, (const u8[]){ 13, 14, 15, ASCR_BACK, 0}},         //CharAnim_Right
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_RightAlt
+	{2, (const u8[]){ 16,  16,  17, 17,  17,  18,  18,  18,  19,  19, 19,  19,  20,  21,  22,  22,  22,  23, 23,  20,  20, 23,  24, 24,  25,  25, ASCR_BACK, 0}}, //CharAnim_Special
 };
 
 //taemad character functions
@@ -196,16 +196,6 @@ Character *Char_taemad_New(fixed_t x, fixed_t y)
 		"idle1.tim", //taemad_ArcMain_Idle1
 		"idle2.tim", //taemad_ArcMain_Idle1
 		"idle3.tim", //taemad_ArcMain_Idle
-		"speak0.tim", //taemad_ArcMain_Right	
-		"speak1.tim", //taemad_ArcMain_Right
-		"speak2.tim", //taemad_ArcMain_Right
-		"speak3.tim", //taemad_ArcMain_Right
-		"speak4.tim", //taemad_ArcMain_Right
-		"speak5.tim", //taemad_ArcMain_Right
-		"speak6.tim", //taemad_ArcMain_Right
-		"speak7.tim", //taemad_ArcMain_Right
-		"speak8.tim", //taemad_ArcMain_Right
-		"speak9.tim", //taemad_ArcMain_Right
 		"left0.tim",  //taemad_ArcMain_Left
 		"left1.tim",  //taemad_ArcMain_Left
 		"left2.tim",  //taemad_ArcMain_Left
@@ -218,6 +208,16 @@ Character *Char_taemad_New(fixed_t x, fixed_t y)
 		"right0.tim", //taemad_ArcMain_Right
 		"right1.tim", //taemad_ArcMain_Right
 		"right2.tim", //taemad_ArcMain_Right
+		"speak0.tim", //taemad_ArcMain_Right	
+		"speak1.tim", //taemad_ArcMain_Right
+		"speak2.tim", //taemad_ArcMain_Right
+		"speak3.tim", //taemad_ArcMain_Right
+		"speak4.tim", //taemad_ArcMain_Right
+		"speak5.tim", //taemad_ArcMain_Right
+		"speak6.tim", //taemad_ArcMain_Right
+		"speak7.tim", //taemad_ArcMain_Right
+		"speak8.tim", //taemad_ArcMain_Right
+		"speak9.tim", //taemad_ArcMain_Right
 		NULL
 	};
 	IO_Data *arc_ptr = this->arc_ptr;
