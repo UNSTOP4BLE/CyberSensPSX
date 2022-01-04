@@ -42,7 +42,7 @@ static const CharFrame char_opc_frame[] = {
 };
 
 static const Animation char_opc_anim[CharAnim_Max] = {
-	{2, (const u8[]){ 0,  1,  2,  ASCR_BACK, 1}},                         //CharAnim_Idle
+	{2, (const u8[]){ 0,  1,  2,  ASCR_CHGANI, 0}},                         //CharAnim_Idle
 	{1, (const u8[]){ 0,  0,  1,  1,  2,  2,  3,  4,  4,  5, ASCR_BACK, 1}}, //CharAnim_Left
 	{0, (const u8[]){ASCR_CHGANI, CharAnim_Left}},                           //CharAnim_LeftAlt
 	{2, (const u8[]){12, 13, ASCR_REPEAT}},                                  //CharAnim_Down

@@ -831,6 +831,8 @@ void Menu_Tick(void)
 				{StageId_Clwn_2, "STICKYBM", false},
 				{StageId_Clwn_2, "BRIGHTFYRE", false},
 				{StageId_Clwn_2, "GENOX", false},
+				{StageId_Clwn_2, "	MADE NEW HOPE SONG", false},
+				{StageId_Clwn_2, "ICEYDUNOIR", false},
 				{StageId_Kapi_1, "	PORT PROGRAMMING", false},
 				{StageId_Kapi_2, "UNSTOPABLE", false},	
 				{StageId_Kapi_2, "IGORSOU", false},	

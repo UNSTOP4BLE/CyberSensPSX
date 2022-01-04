@@ -127,6 +127,7 @@ static const CharFrame char_bf_frame[] = {
 
 static const Animation char_bf_anim[PlayerAnim_Max] = {
 	{2, (const u8[]){ 0,  1,  2,  2,  3, ASCR_BACK, 1}}, //CharAnim_Idle
+	{0, (const u8[]){ASCR_CHGANI, CharAnim_Idle}},   //CharAnim_LeftAlt
 	{2, (const u8[]){ 4,  5, ASCR_BACK, 1}},             //CharAnim_Left
 	{1, (const u8[]){ 4,  6,  6,  7, ASCR_BACK, 1}},     //CharAnim_LeftAlt
 	{2, (const u8[]){ 8,  9, ASCR_BACK, 1}},             //CharAnim_Down
