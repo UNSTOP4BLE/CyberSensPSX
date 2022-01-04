@@ -20,11 +20,12 @@ typedef u8 CharSpec;
 //Character enums
 typedef enum
 {
-	CharAnim_Idle,	CharAnim_Special,
+	CharAnim_Idle,
 	CharAnim_Left,  CharAnim_LeftAlt,
 	CharAnim_Down,  CharAnim_DownAlt,
 	CharAnim_Up,    CharAnim_UpAlt,
 	CharAnim_Right, CharAnim_RightAlt,
+	CharAnim_Special,
 	
 	CharAnim_Max //Max standard/shared animation
 } CharAnim;
