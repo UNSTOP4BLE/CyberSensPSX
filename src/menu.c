@@ -569,8 +569,16 @@ void Menu_Tick(void)
 			
 			//Draw version identification
 			menu.font_bold.draw(&menu.font_bold,
-				"PORT BY UNSTOPABLE",
+				"CYBERSENSATIONPSX",
 				16,
+				SCREEN_HEIGHT - 48,
+				FontAlign_Left
+			);
+
+			//Draw version identification
+			menu.font_bold.draw(&menu.font_bold,
+				"BY UNSTOPABLE",
+				48,
 				SCREEN_HEIGHT - 32,
 				FontAlign_Left
 			);
